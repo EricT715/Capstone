@@ -127,18 +127,21 @@ const Game = ({ predictAction, trainedModel }) => {
         <div id="character" className={animate ? "animate" : ""}></div>
         <div id="block"></div>
       </div>
-      <div>Score: {score}</div>
+      <div className="area">
+      <div className="score">Score: {score}
       {!gameOver && (
-        <button onClick={handleJump} disabled={animate}>
+        <button className="jumpbutton" onClick={handleJump} disabled={animate}>
           Jump
         </button>
       )}
+      </div>
       {gameOver && (
-        <div>
-          <p>You Lost</p>
-          <button onClick={restartGame}>Restart</button>
+        <div className="gamelost">
+          <p className="Lost">You Lost</p>
+          <button className="restart" onClick={restartGame}>Restart</button>
         </div>
       )}
+      </div>
     </div>
   );
 };

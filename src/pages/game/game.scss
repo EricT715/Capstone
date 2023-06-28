@@ -4,10 +4,10 @@
   }
   
   #game {
-    width: 500px;
-    height: 200px;
+    width: 100%;
+    height: 300px;
     border: 1px solid black;
-    background-color: black;
+    background-image: url("../../data/map/background1.png");
     position: relative; /* Added positioning */
   }
   
@@ -37,7 +37,40 @@
     left: 480px;
     animation: block 1s infinite linear;
   }
-  
+
+  .score{
+    font-size: 64px;
+    display: flex;
+    justify-content: center;
+  }
+  .gamelost{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+  .jumpbutton{
+    display: flex;
+    justify-content: center;
+    font-size: 84px;
+    align-items: center;
+  }
+  .Lost{
+    color: red;
+    font-size: 64px;
+    padding-bottom: 60px;
+  }
+
+  .restart{
+    padding: 40px;
+    font-size: 64px;
+  }
+
+  .area{
+    background-image: url(../../data/map/woodbackground2.jpg);
+    height: 1000px;
+  }
+
   @keyframes block {
     0% {
       left: 480px;
@@ -52,7 +85,7 @@
       top: 0; /* Adjusted jump start position to align with the ground level */
     }
     30% {
-      top: -20px; /* Adjusted jump height to clear the maximum obstacle height */
+      top: 10px; /* Adjusted jump height to clear the maximum obs tacle height */
     } 
     70% {
       top: -20x; /* Adjusted jump height to clear the maximum obstacle height */
