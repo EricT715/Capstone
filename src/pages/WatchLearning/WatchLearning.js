@@ -1,3 +1,4 @@
+import "./WatchLearning.scss"
 import React, { useState, useEffect, useMemo } from "react";
 import * as tf from "@tensorflow/tfjs";
 import Game from "../game/game";
@@ -57,32 +58,34 @@ const WatchLearning = () => {
   };
 
   const startTraining = async () => {
-    setIsTraining(true);
-    setTrainedModel(null);
-    setCurrentEpoch(0);
+    if (!isTraining && !trainedModel) {
+      setIsTraining(true);
+      setTrainedModel(null);
+      setCurrentEpoch(0);
 
-    const model = tf.sequential();
-    model.add(tf.layers.dense({ units: 64, activation: "relu", inputShape: [2] }));
-    model.add(tf.layers.dense({ units: 1, activation: "sigmoid" }));
-    model.compile({ loss: "meanSquaredError", optimizer: "adam" });
+      const model = tf.sequential();
+      model.add(tf.layers.dense({ units: 64, activation: "relu", inputShape: [2] }));
+      model.add(tf.layers.dense({ units: 1, activation: "sigmoid" }));
+      model.compile({ loss: "meanSquaredError", optimizer: "adam" });
 
-    const numEpochs = 100;
-    const inputTensor = tf.tensor2d(trainingData.map((item) => item.input));
-    const outputTensor = tf.tensor2d(trainingData.map((item) => item.output));
+      const numEpochs = 100;
+      const inputTensor = tf.tensor2d(trainingData.map((item) => item.input));
+      const outputTensor = tf.tensor2d(trainingData.map((item) => item.output));
 
-    await model.fit(inputTensor, outputTensor, {
-      epochs: numEpochs,
-      callbacks: {
-        onEpochEnd: (epoch) => {
-          handleEpochFinished(epoch + 1);
+      await model.fit(inputTensor, outputTensor, {
+        epochs: numEpochs,
+        callbacks: {
+          onEpochEnd: (epoch) => {
+            handleEpochFinished(epoch + 1);
+          },
         },
-      },
-    });
+      });
 
-    setTrainedModel(model);
-    setIsTraining(false);
-    alert("Training is complete!"); // Display notification when training is done
-    loadModel(); // Load the saved model after training is complete
+      setTrainedModel(model);
+      setIsTraining(false);
+      alert("Training is complete!"); // Display notification when training is done
+      loadModel(); // Load the saved model after training is complete
+    }
   };
 
   const machineLearningComponent = useMemo(() => {
@@ -99,12 +102,12 @@ const WatchLearning = () => {
   }, [isTraining, trainingData, handleEpochFinished]);
 
   return (
-    <div>
-      <h1>Watch Learning Page</h1>
+    <div className="learning">
+      <h1 className="learning__title">Watch Learning Page</h1>
       {isTraining ? (
-        <p>Training in progress... Epoch: {currentEpoch}</p>
+        <p className="learning__training">Training in progress... Epoch: {currentEpoch}</p>
       ) : (
-        <p>Training complete! Model is ready.</p>
+        <p className="learning__training">Training complete! Model is ready.</p>
       )}
 
       {!isTraining && trainedModel && (
@@ -114,17 +117,11 @@ const WatchLearning = () => {
         </>
       )}
 
-      {isTraining ? (
-        <button onClick={startTraining} disabled>
-          Training in Progress
-        </button>
-      ) : (
-        <button onClick={startTraining} disabled={isTraining || trainedModel}>
-          Start Training
-        </button>
-      )}
+      <button className="learning__button" onClick={startTraining} disabled={isTraining || trainedModel}>
+        {isTraining ? "Training in Progress" : "Start Training"}
+      </button>
 
-      <button onClick={loadModel} disabled={isTraining || trainedModel}>
+      <button className="learning__button" onClick={loadModel}>
         Load Model
       </button>
 

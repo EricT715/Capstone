@@ -4,36 +4,38 @@
   }
   
   #game {
-    width: 100%;
     height: 300px;
     border: 1px solid black;
     background-image: url("../../data/map/background1.png");
-    position: relative; /* Added positioning */
+    position: relative; 
   }
   
   #character {
-    width: 20px;
-    height: 50px;
-    background-color: yellow;
-    position: absolute; /* Changed positioning to absolute */
-    bottom: 0; /* Adjusted positioning to align with the ground level */
+    width: 100px;
+    height: 100px;
+    background-image: url("../../data/character/runningcharacter.jpg");
+    background-size: 125px;
+    background-position: center;
+    position: absolute;
+    bottom: 0;
   }
   
   .character.ducking {
     height: 20px;
-    top: 0; /* Adjusted positioning to align with the ground level */
+    top: 0;
   }
   
   .animate {
-    animation: jump 500ms infinite;
+    animation: jump 600ms infinite;
   }
   
   #block {
-    width: 20px;
+    width: 50px;
     height: 20px;
-    background-color: blue;
-    position: absolute; /* Changed positioning to absolute */
-    bottom: 0; /* Adjusted positioning to align with the ground level */
+    background-image: url(../../data/character/cat.png);
+    background-size: 50px 20px;
+    position: absolute; 
+    bottom: 0; 
     left: 480px;
     animation: block 1s infinite linear;
   }
@@ -73,7 +75,7 @@
 
   @keyframes block {
     0% {
-      left: 480px;
+      left: 500px;
     }
     100% {
       left: -40px;
@@ -82,15 +84,15 @@
   
   @keyframes jump {
     0% {
-      top: 0; /* Adjusted jump start position to align with the ground level */
+      top: 0; 
     }
     30% {
-      top: 10px; /* Adjusted jump height to clear the maximum obs tacle height */
+      top: 10px; 
     } 
     70% {
-      top: -20x; /* Adjusted jump height to clear the maximum obstacle height */
+      top: -20x;
     }
      100% {
-      top: 0; /* Adjusted jump end position to align with the ground level */
+      top: 0; 
     }
   }
