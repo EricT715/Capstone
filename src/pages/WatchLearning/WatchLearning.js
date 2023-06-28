@@ -81,6 +81,8 @@ const WatchLearning = () => {
 
     setTrainedModel(model);
     setIsTraining(false);
+    alert("Training is complete!"); // Display notification when training is done
+    loadModel(); // Load the saved model after training is complete
   };
 
   const machineLearningComponent = useMemo(() => {

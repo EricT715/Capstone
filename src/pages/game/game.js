@@ -109,7 +109,7 @@ const Game = ({ predictAction, trainedModel }) => {
 
       if (!gameOver && trainedModel) {
         const predictedAction = predictAction(gameState);
-        if (predictedAction === "jump") {
+        if (predictedAction === "Jump") {
           handleJump();
         }
       }
@@ -128,19 +128,26 @@ const Game = ({ predictAction, trainedModel }) => {
         <div id="block"></div>
       </div>
       <div className="area">
-      <div className="score">Score: {score}
-      {!gameOver && (
-        <button className="jumpbutton" onClick={handleJump} disabled={animate}>
-          Jump
-        </button>
-      )}
-      </div>
-      {gameOver && (
-        <div className="gamelost">
-          <p className="Lost">You Lost</p>
-          <button className="restart" onClick={restartGame}>Restart</button>
+        <div className="score">
+          Score: {score}
+          {!gameOver && (
+            <button
+              className="jumpbutton"
+              onClick={handleJump}
+              disabled={animate}
+            >
+              Jump
+            </button>
+          )}
         </div>
-      )}
+        {gameOver && (
+          <div className="gamelost">
+            <p className="Lost">You Lost</p>
+            <button className="restart" onClick={restartGame}>
+              Restart
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );
